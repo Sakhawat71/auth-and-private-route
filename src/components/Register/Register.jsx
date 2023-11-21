@@ -4,6 +4,7 @@ const Register = () => {
 
     const handelRegister = e => {
         e.preventDefualt()
+        
     }
 
 
