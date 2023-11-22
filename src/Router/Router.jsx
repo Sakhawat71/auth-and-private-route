@@ -6,6 +6,8 @@ import Register from "../components/Register/Register";
 import ErrorPage from "../pages/ErrorPage";
 import Orders from "../components/Orders/Orders";
 import PrivetRouter from "../PrivetRouter/PrivetRouter";
+import Profile from "../components/Profile/Profile";
+import Dashboard from "../components/Dashboard/Dashboard";
 
 const Router = createBrowserRouter([
     {
@@ -28,6 +30,14 @@ const Router = createBrowserRouter([
             {
                 path: '/orders',
                 element: <PrivetRouter><Orders></Orders></PrivetRouter>
+            },
+            {
+                path: '/profile',
+                element: <PrivetRouter><Profile></Profile></PrivetRouter>
+            },
+            {
+                path: '/deshboard',
+                element: <PrivetRouter><Dashboard></Dashboard></PrivetRouter>
             }
         ]
     }

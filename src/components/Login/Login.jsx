@@ -5,7 +5,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 
 const Login = () => {
 
-    const { signinUser } = useContext(AuthContext)
+    const { signinUser, googleSignIn } = useContext(AuthContext)
     const navigate = useNavigate()
 
     const handelLogin = e => {
@@ -19,6 +19,20 @@ const Login = () => {
             .then(result => {
                 console.log(result.user)
                 e.target.reset()
+                navigate('/')
+            })
+            .catch(error => {
+                console.log(error.code)
+                console.log(error.message)
+            })
+
+    }
+
+    const handelGoogleLogin = () => {
+        
+        googleSignIn()
+            .then(result => {
+                console.log(result.user)
                 navigate('/')
             })
             .catch(error => {
@@ -79,8 +93,12 @@ const Login = () => {
                         <p >Don`t have an account? <Link to="/register">
                             <button className="btn btn-sm ml-1">Register</button>
                         </Link> </p>
+
                     </form>
 
+                    <div className="text-center p-2 border-2 mb-2 mx-auto">
+                        <Link onClick={handelGoogleLogin}>Google</Link>
+                    </div>
                 </div>
             </div>
         </div>
