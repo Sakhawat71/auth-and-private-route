@@ -2,8 +2,10 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 
+
 const Login = () => {
 
+    const { signinUser } = useContext(AuthContext)
 
     const handelLogin = e => {
         e.preventDefault();
@@ -12,11 +14,15 @@ const Login = () => {
         const password = e.target.password.value;
         console.log(email, password)
 
-
+        signinUser(email, password)
+            .then(result => console.log(result.user))
+            .catch(error => {
+                console.log(error.code)
+                console.log(error.message)
+            })
 
     }
-    const {test} = useContext(AuthContext)
-    console.log(test)
+
     return (
 
         <div className="hero min-h-screen bg-base-200">
@@ -52,7 +58,7 @@ const Login = () => {
                                 placeholder="Password"
                                 className="input input-bordered"
                                 required />
-                            
+
                             <label className="label">
                                 <Link
                                     href="#"
