@@ -10,6 +10,13 @@ const Navbar = () => {
         <li> <NavLink to='/login'>Login</NavLink> </li>
         <li> <NavLink to='/register'>Register</NavLink> </li>
         <li> <NavLink to='/orders'>Orders</NavLink> </li>
+        {
+            user && <>
+
+                <li> <NavLink to='/orders'>Profile</NavLink> </li>
+                <li> <NavLink to='/orders'>Dashbord</NavLink> </li>
+            </>
+        }
 
     </>
 
