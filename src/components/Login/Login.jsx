@@ -15,7 +15,10 @@ const Login = () => {
         console.log(email, password)
 
         signinUser(email, password)
-            .then(result => console.log(result.user))
+            .then(result => {
+                console.log(result.user)
+                e.target.reset()
+            })
             .catch(error => {
                 console.log(error.code)
                 console.log(error.message)

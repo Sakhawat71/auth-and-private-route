@@ -7,33 +7,44 @@ export const AuthContext = createContext(null)
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
+    const [isLoading, setIsLoading] = useState(true);
 
 
     const createUser = (email, password) => {
+        setIsLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
     const signinUser = (email, password) => {
-        return signInWithEmailAndPassword(auth,email,password)
+        setIsLoading(true)
+        return signInWithEmailAndPassword(auth, email, password)
     }
 
 
-    useEffect( ()=>{
-        const unSubscriber = onAuthStateChanged(auth, (currentUser)=>{
+    useEffect(() => {
+        const unSubscriber = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser)
-            console.log('current user: ',currentUser)
+            setIsLoading(false)
+            console.log('current user: ', currentUser)
         })
-        return ()=>{
+        return () => {
             unSubscriber();
         }
-    },[])
+    }, [])
 
-    const logOut = () =>{
+    const logOut = () => {
+        setIsLoading(true)
         return signOut(auth)
     }
 
 
-    const authinfo = { user, createUser ,signinUser, logOut}
+    const authinfo = {
+        user,
+        isLoading,
+        createUser,
+        signinUser,
+        logOut
+    }
     return (
         <AuthContext.Provider value={authinfo}>
             {children}
